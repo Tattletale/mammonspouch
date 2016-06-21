@@ -30,5 +30,28 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 */
+//buildscript {
+//    repositories {
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//    }
+//    dependencies {
+//        classpath "gradle.plugin.com.github.maiflai:gradle-scalatest:0.12"
+//    }
+//}
+//
+//apply plugin: "com.github.maiflai.scalatest"
 apply plugin: 'scala'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.1'
+    testCompile group: 'org.scalatest', name: 'scalatest_2.11', version: '2.2.6'
+
+}
 
