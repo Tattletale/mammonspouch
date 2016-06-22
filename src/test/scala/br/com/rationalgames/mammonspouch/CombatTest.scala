@@ -1,7 +1,6 @@
 package br.com.rationalgames.mammonspouch
 
 import org.scalatest._
-import sun.plugin.dom.exception.InvalidStateException
 
 /**
   *
