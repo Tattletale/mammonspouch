@@ -13,9 +13,8 @@ class Character(level: Int) {
 
   def move = {
     moves = moves + 1
-    if(moves > 2) {
-      throw new IllegalStateException()
-    }
+    if(moves > 2) throw new IllegalStateException()
+
     new Move(damage)
   }
 
