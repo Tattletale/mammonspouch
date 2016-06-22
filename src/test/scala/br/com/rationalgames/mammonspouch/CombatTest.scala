@@ -5,7 +5,7 @@ import org.scalatest._
 /**
   *
   */
-class PlayerTest extends FeatureSpec with GivenWhenThen {
+class CombatTest extends FeatureSpec with GivenWhenThen {
 
 
   feature("Combat between player and one monster") {
@@ -16,12 +16,21 @@ class PlayerTest extends FeatureSpec with GivenWhenThen {
     info("Player has two moves by default.")
 
     scenario("Scenario 1: Same level parties") {
-      info("Combat begins between a level 1 player and a level 1 enemy")
+      Given("Combat begins between a level 1 player and a level 1 enemy")
+      val monster = new Monster(1)
+      monster.life = 1
+      val hero = new Hero(1)
+      hero.damage = 1
+      val combat = new Combat(hero, monster)
       info("Player begins the battle (first turn)")
-      info("Player moves once and attacks the enemy")
-      info("Enemy takes damage")
-      info("Player moves a second time and attacks the enemy")
-      info("Enemy takes damage")
+      When("Player moves once and attacks the enemy")
+      combat.first.move.attack(monster)
+      Then("Enemy takes damage")
+      assert(monster.life == 0)
+      When("Player moves a second time and attacks the enemy")
+      combat.first.move.attack(monster)
+      Then("Enemy takes damage")
+      assert(monster.life == 0)
     }
 
     scenario("Scenario 2: Hero's higher level than the enemy") {
