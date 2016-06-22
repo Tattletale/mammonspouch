@@ -1,19 +1,19 @@
 package br.com.rationalgames.mammonspouch
 
 import org.scalatest._
+import sun.plugin.dom.exception.InvalidStateException
 
 /**
   *
   */
 class CombatTest extends FeatureSpec with GivenWhenThen {
 
-
   feature("Combat between player and one monster") {
     info("Combat begins")
     info("Combat begins with the highest level creature (hero, or monster), in case of both parties having the same level, first turn is conceded to the player.")
     info("Turns are subdivided in moves, each creature has a set number of moves, turns dictates who is playing at the time, either the player or the opponents.")
     info("In the enemy turn, their order of movement is according to their levels or order of spawn.")
-    info("Player has two moves by default.")
+
 
     scenario("Scenario 1: Same level parties") {
       Given("Combat begins between a level 1 player and a level 1 enemy")
@@ -31,6 +31,11 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       combat.first.move.attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
+
+      info("Player has two moves by default.")
+      intercept[IllegalStateException] {
+        combat.first.move
+      }
     }
 
     scenario("Scenario 2: Hero's higher level than the enemy") {

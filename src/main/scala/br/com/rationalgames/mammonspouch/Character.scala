@@ -9,6 +9,14 @@ class Character(level: Int) {
 
   def takes(damage: Int) = if(life > 0) life = life - damage
 
-  def move = new Move(damage)
+  var moves = 0
+
+  def move = {
+    moves = moves + 1
+    if(moves > 2) {
+      throw new IllegalStateException()
+    }
+    new Move(damage)
+  }
 
 }
