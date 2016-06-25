@@ -62,11 +62,17 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
 
     scenario("Scenario 3: Monster is higher level than the player") {
       info("Combat begins between a level 1 player and a level 2 enemy")
+      val monster = new Monster(2)
+      monster.damage = 1
+      val hero = new Hero(1)
+      hero.life = 1
+      val combat = new Combat(hero, monster)
       info("Enemy begins the battle (first turn)")
       info("Enemy moves once and attacks the player")
+      combat.first.move.attack(hero)
       info("Player takes damage")
+      assert(hero.life == 0)
     }
-
 
 
   }
