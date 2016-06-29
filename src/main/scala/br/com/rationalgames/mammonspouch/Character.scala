@@ -12,7 +12,7 @@ case class Character(level: Int) extends Ordered[Character] {
 
   def move = {
     moves = moves + 1
-    if (moves > 2) throw new IllegalStateException()
+    if (moves > 2) throw new IllegalStateException("character cannot move more then 2 times")
 
     new Move(damage)
   }
