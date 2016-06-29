@@ -3,11 +3,14 @@ package br.com.rationalgames.mammonspouch
 /**
   *
   */
-case class Combat(hero: Hero, monster: Monster) {
+case class Combat(characters: Character*) {
 
-  val first = if (hero.level >= monster.level) hero else monster
+  val order = characters.sorted
+  val first = next
+  val second = next
 
-
-  val second = if (first.isInstanceOf[Hero]) monster else hero
+  def next = {
+    order.iterator.next()
+  }
 
 }

@@ -3,19 +3,28 @@ package br.com.rationalgames.mammonspouch
 /**
   *
   */
-class Character(level: Int) {
+case class Character(level: Int) extends Ordered[Character] {
   var damage = 0
   var life = 0
-
-  def takes(damage: Int) = if(life > 0) life = life - damage
-
   var moves = 0
+
+  def takes(damage: Int) = if (life > 0) life = life - damage
 
   def move = {
     moves = moves + 1
-    if(moves > 2) throw new IllegalStateException()
+    if (moves > 2) throw new IllegalStateException()
 
     new Move(damage)
   }
 
+  override def compare(that: Character): Int = {
+    if (that.level > this.level)
+      1
+    else if (that.level < this.level)
+      -1
+    else if (that.isInstanceOf[Hero])
+      1
+    else
+      0
+  }
 }
