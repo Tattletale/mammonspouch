@@ -13,7 +13,6 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
     info("Turns are subdivided in moves, each creature has a set number of moves, turns dictates who is playing at the time, either the player or the opponents.")
     info("In the enemy turn, their order of movement is according to their levels or order of spawn.")
 
-
     scenario("Scenario 1: Same level parties") {
       Given("Combat begins between a level 1 player and a level 1 enemy")
       val monster = new Monster(1)
@@ -22,18 +21,20 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       hero.damage = 1
       val combat = new Combat(hero, monster)
       info("Player begins the battle (first turn)")
+      val player = combat.next
+      assert(player.isInstanceOf[Hero])
       When("Player moves once and attacks the enemy")
-      combat.first.move.attack(monster)
+      player.move.attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
       When("Player moves a second time and attacks the enemy")
-      combat.first.move.attack(monster)
+      player.move.attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
 
       info("Player has two moves by default.")
       intercept[IllegalStateException] {
-        combat.first.move
+        player.move
       }
     }
 
@@ -45,18 +46,20 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       hero.damage = 1
       val combat = new Combat(hero, monster)
       info("Player begins the battle (first turn)")
+      val player = combat.next
+      assert(player.isInstanceOf[Hero])
       When("Player moves once and attacks the enemy")
-      combat.first.move.attack(monster)
+      player.move.attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
       When("Player moves a second time and attacks the enemy")
-      combat.first.move.attack(monster)
+      player.move.attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
 
       info("Player has two moves by default.")
       intercept[IllegalStateException] {
-        combat.first.move
+        player.move
       }
     }
 
@@ -68,8 +71,10 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       hero.life = 1
       val combat = new Combat(hero, monster)
       info("Enemy begins the battle (first turn)")
+      val enemy = combat.next
+      assert(enemy.isInstanceOf[Monster])
       When("Enemy moves once and attacks the player")
-      combat.first.move.attack(hero)
+      enemy.move.attack(hero)
       Then("Player takes damage")
       assert(hero.life == 0)
     }
