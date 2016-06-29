@@ -8,7 +8,7 @@ case class Character(level: Int) extends Ordered[Character] {
   var life = 0
   var moves = 0
 
-  def takes(damage: Int) = if (life > 0) life = life - damage
+  def takes(damage: Int) = if (life > 0) life = life - damage else throw new IllegalArgumentException("life cannot be lesser then zero")
 
   def move = {
     moves = moves + 1

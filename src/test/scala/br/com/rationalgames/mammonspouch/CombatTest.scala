@@ -16,7 +16,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
     scenario("Scenario 1: Same level parties") {
       Given("Combat begins between a level 1 player and a level 1 enemy")
       val monster = new Monster(1)
-      monster.life = 1
+      monster.life = 2
       val hero = new Hero(1)
       hero.damage = 1
       val combat = new Combat(hero, monster)
@@ -26,7 +26,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       When("Player moves once and attacks the enemy")
       player.move.attack(monster)
       Then("Enemy takes damage")
-      assert(monster.life == 0)
+      assert(monster.life == 1)
       When("Player moves a second time and attacks the enemy")
       player.move.attack(monster)
       Then("Enemy takes damage")
@@ -41,7 +41,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
     scenario("Scenario 2: Hero's higher level than the enemy") {
       Given("Combat begins between a level 2 player and a level 1 enemy")
       val monster = new Monster(1)
-      monster.life = 1
+      monster.life = 2
       val hero = new Hero(2)
       hero.damage = 1
       val combat = new Combat(hero, monster)
@@ -51,7 +51,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       When("Player moves once and attacks the enemy")
       player.move.attack(monster)
       Then("Enemy takes damage")
-      assert(monster.life == 0)
+      assert(monster.life == 1)
       When("Player moves a second time and attacks the enemy")
       player.move.attack(monster)
       Then("Enemy takes damage")
