@@ -24,17 +24,17 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       val player = combat.next
       assert(player.isInstanceOf[Hero])
       When("Player moves once and attacks the enemy")
-      player.move.attack(monster)
+      player.move().attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 1)
       When("Player moves a second time and attacks the enemy")
-      player.move.attack(monster)
+      player.move().attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
 
       info("Player has two moves by default.")
       intercept[IllegalStateException] {
-        player.move
+        player.move()
       }
     }
 
@@ -49,17 +49,17 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       val player = combat.next
       assert(player.isInstanceOf[Hero])
       When("Player moves once and attacks the enemy")
-      player.move.attack(monster)
+      player.move().attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 1)
       When("Player moves a second time and attacks the enemy")
-      player.move.attack(monster)
+      player.move().attack(monster)
       Then("Enemy takes damage")
       assert(monster.life == 0)
 
       info("Player has two moves by default.")
       intercept[IllegalStateException] {
-        player.move
+        player.move()
       }
     }
 
@@ -74,7 +74,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       val enemy = combat.next
       assert(enemy.isInstanceOf[Monster])
       When("Enemy moves once and attacks the player")
-      enemy.move.attack(hero)
+      enemy.move().attack(hero)
       Then("Player takes damage")
       assert(hero.life == 0)
     }

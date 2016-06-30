@@ -10,9 +10,9 @@ case class Character(level: Int) extends Ordered[Character] {
 
   def takes(damage: Int) = if (life > 0) life = life - damage else throw new IllegalArgumentException("life cannot be lesser then zero")
 
-  def move = {
+  def move(maxMoves: Int = 2) = {
     moves = moves + 1
-    if (moves > 2) throw new IllegalStateException("character cannot move more then 2 times")
+    if (moves > maxMoves) throw new IllegalStateException(s"character cannot move more then $maxMoves times")
 
     new Move(damage)
   }
