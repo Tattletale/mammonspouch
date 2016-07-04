@@ -79,7 +79,7 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       assert(hero.life == 0)
     }
 
-    scenario("Scenario 4: Player fights 2 monsters of the same level as him"){
+    scenario("Scenario 4: Player fights 2 monsters of the same level as him") {
       info("Combat begins between a level 1 player and two level 1 enemy")
       info("Player begins the battle (first turn)")
       info("Player moves once and attacks the enemy")
@@ -92,6 +92,31 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       info("Second enemy moves once and attacks the player")
       info("Player takes damage")
     }
+
+    scenario("Scenario 5: Player fights 2 monsters, one higher level than the other, while the playing being of the same level or above them.") {
+      info("Combat begins between a level 2 player and one enemy of level 1 and another one of level 2")
+      info("Player begins the battle (first turn)")
+      info("Player moves once and attacks the enemy")
+      info("Enemy takes damage")
+      info("Player moves a second time and attacks the enemy")
+      info("Enemy takes damage")
+      info("Enemy turn")
+      info("Level 2 enemy moves once and attacks the player")
+      info("Player takes damage")
+      info("Level 1 enemy moves once and attacks the player")
+      info("Player takes damage")
+    }
+
+    scenario("Scenario 6: Player fights 2 monsters, one higher level than the other, while the playing being lower level than them") {
+      info("Combat begins between a level 2 player and one enemy of level 1 and another one of level 2")
+      info("Enemy begins the battle (first turn)")
+      info("Level 2 enemy moves once and attacks the player")
+      info("Player takes damage")
+      info("Level 1 enemy moves once and attacks the player")
+      info("Player takes damage")
+    }
+
+
   }
 
 }
