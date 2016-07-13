@@ -4,6 +4,7 @@ package br.com.rationalgames.mammonspouch
   *
   */
 class Hero(level: Int) extends Character(level) {
+    private val equipments: Equipments = new Equipments
     private var _physicalWeapon: PhysicalWeapon = null
     private var _rangedWeapon: RangedWeapon = null
     private var _sigil: Sigil = null

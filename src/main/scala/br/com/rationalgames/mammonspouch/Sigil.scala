@@ -1,5 +1,5 @@
 package br.com.rationalgames.mammonspouch
 
-case class Sigil() {
+case class Sigil() extends Equippable{
 
 }

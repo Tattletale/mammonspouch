@@ -1,5 +1,5 @@
 package br.com.rationalgames.mammonspouch
 
-class PhysicalWeapon() {
+class PhysicalWeapon() extends Equippable {
 
 }
