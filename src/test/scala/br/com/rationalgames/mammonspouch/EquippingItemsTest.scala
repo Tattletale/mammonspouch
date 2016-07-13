@@ -59,44 +59,45 @@ class EquippingItemsTest extends FeatureSpec with GivenWhenThen {
     }
 
     feature("Player can switch items") {
-        info("In case the player wants to equip a weapon but he already has a weapon equiped for that slot," +
-            " his currently equiped weapon is switched for the one he wants to equip")
+        info("When player switches an equipped item for another item," +
+            " the previously equipped item is unequipped and the other item is equipped in its place")
 
-        scenario("Player equips a phyisicalWeapon when he's already had a phyisicalWeapon equipped") {
-            Given("a Hero that has a phyisicalWeapon equipped")
-            val aHero: Hero = new Hero(1)
-            aHero.equip(new PhysicalWeapon)
-            And("a new physicalWeapon")
-            val newPhysicalWeapon: PhysicalWeapon = new PhysicalWeapon
-            When("hero equips the new phyisicalWeapon")
-            aHero.equip(newPhysicalWeapon)
-            Then("hero's physicalWeapon should be the newly equipped weapon")
-            assert(aHero.physicalWeapon == newPhysicalWeapon)
+        scenario("Player switches a physicalWeapon for another physicialWeapon") {
+            Given("a Hero")
+            And("another physicialWeapon")
+            And("that the hero has a physicialWeapon equipped")
+            When("hero switches his physicialWeapon for another physicialWeapon")
+            Then("hero's phyisicalWeapon should be the switched-for physicalWeapon")
+            Then("the previously equipped item should be returned")
         }
 
-
-        scenario("Player equips a rangedWeapon when he's already had a rangedWeapon equipped") {
+        scenario("Player switches a rangedWeapon for another rangedWeapon") {
             Given("a Hero")
+            And("another rangedWeapon")
             And("that the hero has a rangedWeapon equipped")
-            When("hero equips another rangedWeapon")
-            Then("hero 's rangedWeapon should be the newly equipped weapon")
+            When("hero switches his rangedWeapon for another rangedWeapon")
+            Then("hero's rangedWeapon should be the switched-for rangedWeapon")
+            Then("the previously equipped item should be returned")
         }
 
-        scenario("Player equips a sigil when he's already had a sigil equipped") {
+        scenario("Player switches an armor for another armor") {
             Given("a Hero")
-            And("that the hero has a Sigil equipped")
-            When("hero equips another Sigil")
-            Then("hero 's Sigil should be the newly equipped Sigil")
-        }
-
-        scenario("Player equips an armor when he's already had an armor equipped") {
-            Given("a Hero")
+            And("another armor")
             And("that the hero has an armor equipped")
-            When("hero equips another Armor")
-            Then("hero 's Armor should be the newly equipped Armor")
+            When("hero switches his armor for another armor")
+            Then("hero's armor should be the switched-for armor")
+            Then("the previously equipped item should be returned")
+        }
+
+        scenario("Player switches a sigil for another sigil") {
+            Given("a Hero")
+            And("another sigil")
+            And("that the hero has a sigil equipped")
+            When("hero switches his sigil for another sigil")
+            Then("hero's sigil should be the switched-for sigil")
+            Then("the previously equipped item should be returned")
         }
     }
-
 
     feature("Player unequips an item") {
         info("When a player unequips one of his weapons, a Weapon.none is set in the before-equipped weapon's place.")
