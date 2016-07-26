@@ -124,17 +124,46 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
     }
 
     scenario("Scenario 5: Player fights 2 monsters, one higher level than the other, while the playing being of the same level or above them.") {
-      info("Combat begins between a level 2 player and one enemy of level 1 and another one of level 2")
-      info("Player begins the battle (first turn)")
-      info("Player moves once and attacks the enemy")
-      info("Enemy takes damage")
-      info("Player moves a second time and attacks the enemy")
-      info("Enemy takes damage")
+      Given("Combat begins between a level 2 player and one enemy of level 1 and another one of level 2")
+      val hero = new Hero(level = 2)
+      hero.damage = 1
+      hero.life = 2
+
+      val monster1 = new Monster(level = 1)
+      monster1.damage = 1
+      monster1.life = 2
+
+      val monster2 = new Monster(level = 2)
+      monster2.damage = 1
+      monster2.life = 2
+
+      val combat = new Combat(characters = hero, monster1, monster2)
+      And("Player begins the battle (first turn)")
+      val player = combat.next
+      assert(player.isInstanceOf[Hero])
+      When("Player moves once and attacks the enemy")
+      player.move().attack(monster1)
+      Then("Enemy takes damage")
+      assert(monster1.life == 1)
+      When("Player moves a second time and attacks the enemy")
+      player.move().attack(monster1)
+      Then("Enemy takes damage")
+      assert(monster1.life == 0)
       info("Enemy turn")
-      info("Level 2 enemy moves once and attacks the player")
-      info("Player takes damage")
-      info("Level 1 enemy moves once and attacks the player")
-      info("Player takes damage")
+      val enemy1 = combat.next
+      assert(enemy1.isInstanceOf[Monster])
+      When("Level 2 enemy moves once and attacks the player")
+      assert(enemy1.level == 2)
+      enemy1.move().attack(hero)
+      Then("Player takes damage")
+      assert(hero.life == 1)
+      When("Level 1 enemy moves once and attacks the player")
+      val enemy2 = combat.next
+      assert(enemy2.isInstanceOf[Monster])
+      assert(enemy2.level == 1)
+      enemy1.move().attack(hero)
+      Then("Player takes damage")
+      assert(hero.life == 0)
     }
 
     scenario("Scenario 6: Player fights 2 monsters, one higher level than the other, while the playing being lower level than them") {
