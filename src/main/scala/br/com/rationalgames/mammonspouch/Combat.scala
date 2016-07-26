@@ -7,8 +7,10 @@ case class Combat(characters: Character*) {
 
   val order = characters.sorted
 
+  val iterator = order.iterator
+
   def next = {
-    order.iterator.next()
+    iterator.next()
   }
 
 }
