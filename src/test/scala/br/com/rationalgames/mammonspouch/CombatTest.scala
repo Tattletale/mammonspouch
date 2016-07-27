@@ -167,12 +167,35 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
     }
 
     scenario("Scenario 6: Player fights 2 monsters, one higher level than the other, while the playing being lower level than them") {
-      info("Combat begins between a level 2 player and one enemy of level 1 and another one of level 2")
+      Given("Combat begins between a level 1 player and one enemy of level 2 and another one of level 3")
+      val hero = new Hero(level = 1)
+      hero.damage = 1
+      hero.life = 2
+
+      val monster1 = new Monster(level = 2)
+      monster1.damage = 1
+      monster1.life = 2
+
+      val monster2 = new Monster(level = 3)
+      monster2.damage = 1
+      monster2.life = 2
+
+      val combat = new Combat(characters = hero, monster1, monster2)
       info("Enemy begins the battle (first turn)")
+      val enemy1 = combat.next
+      assert(enemy1.isInstanceOf[Monster])
+      assert(enemy1.level == 3)
+      info("Level 3 enemy moves once and attacks the player")
+      enemy1.move().attack(hero)
+      info("Player takes damage")
+      assert(hero.life == 1)
       info("Level 2 enemy moves once and attacks the player")
+      val enemy2 = combat.next
+      assert(enemy2.isInstanceOf[Monster])
+      assert(enemy2.level == 2)
+      enemy2.move().attack(hero)
       info("Player takes damage")
-      info("Level 1 enemy moves once and attacks the player")
-      info("Player takes damage")
+      assert(hero.life == 0)
     }
 
 
