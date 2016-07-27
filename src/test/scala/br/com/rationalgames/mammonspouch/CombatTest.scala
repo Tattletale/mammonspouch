@@ -181,20 +181,20 @@ class CombatTest extends FeatureSpec with GivenWhenThen {
       monster2.life = 2
 
       val combat = new Combat(characters = hero, monster1, monster2)
-      info("Enemy begins the battle (first turn)")
+      And("Enemy begins the battle (first turn)")
       val enemy1 = combat.next
       assert(enemy1.isInstanceOf[Monster])
       assert(enemy1.level == 3)
-      info("Level 3 enemy moves once and attacks the player")
+      When("Level 3 enemy moves once and attacks the player")
       enemy1.move().attack(hero)
-      info("Player takes damage")
+      Then("Player takes damage")
       assert(hero.life == 1)
-      info("Level 2 enemy moves once and attacks the player")
+      When("Level 2 enemy moves once and attacks the player")
       val enemy2 = combat.next
       assert(enemy2.isInstanceOf[Monster])
       assert(enemy2.level == 2)
       enemy2.move().attack(hero)
-      info("Player takes damage")
+      Then("Player takes damage")
       assert(hero.life == 0)
     }
 
